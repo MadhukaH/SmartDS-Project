@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GitHub Feature Branch Workflow - English & Sinhala</title>
+<style>
+:root{
+  --bg:#0d1117;--card:#161b22;--card2:#111827;--text:#e6edf3;--muted:#9da7b3;
+  --border:#30363d;--blue:#58a6ff;--green:#3fb950;--yellow:#d29922;--red:#f85149;
+  --code:#010409;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Segoe UI,Arial,sans-serif;
+  background:linear-gradient(180deg,#0d1117,#111827);
+  color:var(--text);
+  line-height:1.65;
+}
+.container{max-width:1100px;margin:auto;padding:36px 18px 70px}
+.hero,.section{
+  background:rgba(22,27,34,.96);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:28px;
+  margin-bottom:20px;
+  box-shadow:0 15px 35px rgba(0,0,0,.22);
+}
+h1{font-size:clamp(30px,5vw,48px);margin:0 0 10px}
+h2{margin:0 0 14px;font-size:26px}
+h3{margin:18px 0 8px}
+p{color:var(--muted)}
+.badge{
+  display:inline-block;padding:6px 12px;border-radius:999px;
+  background:#17375e;border:1px solid #275d93;color:#c8e4ff;font-size:14px;margin-bottom:12px;
+}
+.lang{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+  margin-top:14px;
+}
+.box{
+  background:var(--card2);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:16px;
+}
+.en{border-left:4px solid var(--blue)}
+.si{border-left:4px solid var(--green)}
+pre{
+  background:var(--code);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:16px;
+  overflow:auto;
+  color:#c9d1d9;
+  font-family:Consolas,monospace;
+  font-size:14px;
+}
+code{font-family:Consolas,monospace}
+.stepnum{
+  display:inline-grid;place-items:center;
+  width:36px;height:36px;border-radius:50%;
+  background:#1f6feb;font-weight:700;margin-right:10px;
+}
+.note{
+  padding:14px 16px;border-radius:12px;margin-top:14px;
+  background:#10281a;border-left:4px solid var(--green);color:#d5f7dc;
+}
+.warn{
+  background:#2d240f;border-left-color:var(--yellow);color:#ffe6aa;
+}
+.danger{
+  background:#2a1414;border-left-color:var(--red);color:#ffc8c5;
+}
+.flow{
+  text-align:center;
+  background:#0f172a;
+  border:1px dashed #475569;
+  border-radius:14px;
+  padding:18px;
+  font-weight:700;
+  color:#dbeafe;
+}
+table{width:100%;border-collapse:collapse;margin-top:12px}
+th,td{padding:13px;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}
+th{background:#1f2937}
+tr:nth-child(even) td{background:#111820}
+.small{font-size:14px}
+footer{text-align:center;color:#7d8590;margin-top:28px;font-size:13px}
+@media(max-width:760px){.lang{grid-template-columns:1fr}.hero,.section{padding:20px}}
+</style>
+</head>
+<body>
+<div class="container">
+
+<section class="hero">
+  <span class="badge">GitHub Group Project Guide</span>
+  <h1>Feature Branch Workflow</h1>
+  <p>From creating a branch to merging it into <strong>main</strong> — explained in English and Sinhala.</p>
+  <div class="note">
+    <strong>Golden Rule:</strong> Do not normally develop directly on <code>main</code>. Create a feature branch and work there.
+    <br><strong>මූලික නීතිය:</strong> සාමාන්‍යයෙන් <code>main</code> branch එකේ direct code කරන්න එපා. Feature branch එකක් හදාගෙන ඒකේ වැඩ කරන්න.
+  </div>
+</section>
+
+<section class="section">
+  <h2><span class="stepnum">1</span>Go to Main Branch / Main Branch එකට යන්න</h2>
+  <pre><code>git checkout main</code></pre>
+  <div class="lang">
+    <div class="box en"><strong>English:</strong><br>This switches your local project to the <code>main</code> branch.</div>
+    <div class="box si"><strong>සිංහල:</strong><br>මෙයින් ඔයාගේ local project එක <code>main</code> branch එකට මාරු වෙනවා.</div>
+  </div>
+</section>
+
+<section class="section">
+  <h2><span class="stepnum">2</span>Get Latest Main / Latest Main එක ගන්න</h2>
+  <pre><code>git pull origin main</code></pre>
+  <div class="lang">
+    <div class="box en"><strong>English:</strong><br>Downloads the latest changes from the GitHub <code>main</code> branch.</div>
+    <div class="box si"><strong>සිංහල:</strong><br>GitHub එකේ <code>main</code> branch එකේ තියෙන latest changes ඔයාගේ PC එකට ගන්නවා.</div>
+  </div>
+</section>
+
+<section class="section">
+  <h2><span class="stepnum">3</span>Create a Feature Branch / Feature Branch එකක් හදන්න</h2>
+  <pre><code>git checkout -b feature-login</code></pre>
+  <div class="lang">
+    <div class="box en"><strong>English:</strong><br>Creates a new branch called <code>feature-login</code> and switches to it immediately.</div>
+    <div class="box si"><strong>සිංහල:</strong><br><code>feature-login</code> නමින් අලුත් branch එකක් හදලා එකවරම ඒ branch එකට මාරු වෙනවා.</div>
+  </div>
+
+  <h3>Other examples / වෙනත් උදාහරණ</h3>
+  <pre><code>git checkout -b feature-dashboard
+git checkout -b feature-user-management
+git checkout -b feature-reports
+git checkout -b feature-database</code></pre>
+</section>
+
+<section class="section">
+  <h2><span class="stepnum">4</span>Check Current Branch / දැන් ඉන්න Branch එක බලන්න</h2>
+  <pre><code>git branch</code></pre>
+  <p>Example output:</p>
+  <pre><code>main
+* feature-login</code></pre>
+  <div class="lang">
+    <div class="box en"><strong>English:</strong><br>The branch with the <code>*</code> is your current branch.</div>
+    <div class="box si"><strong>සිංහල:</strong><br><code>*</code> ලකුණ තියෙන branch එක තමයි දැන් ඔයා වැඩ කරන branch එක.</div>
+  </div>
+</section>
+
+<section class="section">
+  <h2><span class="stepnum">5</span>Do Your Coding / Code කරන්න</h2>
+  <div class="lang">
+    <div class="box en"><strong>English:</strong><br>Now edit files and build only the feature related to this branch. Example: login page, validation, authentication UI.</div>
+    <div class="box si"><strong>සිංහල:</strong><br>දැන් මේ branch එකට අදාල feature එක code කරන්න. උදාහරණයක් ලෙස Login page, validation, authentication UI වගේ දේවල්.</div>
+  </div>
+</section>
+
+<section class="section">
+  <h2><span class="stepnum">6</span>Check Changed Files / වෙනස් වුණු Files බලන්න</h2>
+  <pre><code>git status</code></pre>
+  <div class="lang">
+    <div class="box en"><strong>English:</strong><br>Shows modified, new, deleted and staged files.</div>
+    <div class="box si"><strong>සිංහල:</strong><br>වෙනස් කළ files, අලුත් files, delete කළ files සහ staged files පෙන්වනවා.</div>
+  </div>
+</section>
+
+<section class="section">
+  <h2><span class="stepnum">7</span>Add Files to Staging / Files Stage කරන්න</h2>
+  <pre><code>git add .</code></pre>
+  <div class="lang">
+    <div class="box en"><strong>English:</strong><br>Adds all current changes to the staging area, ready for commit.</div>
+    <div class="box si"><strong>සිංහල:</strong><br>දැනට තියෙන changes සියල්ල commit එකට සූදානම් කරන staging area එකට දානවා.</div>
+  </div>
+</section>
+
+<section class="section">
+  <h2><span class="stepnum">8</span>Create a Commit / Commit එකක් හදන්න</h2>
+  <pre><code>git commit -m "Add login feature"</code></pre>
+  <div class="lang">
+    <div class="box en"><strong>English:</strong><br>Creates a saved checkpoint of your changes with a clear message.</div>
+    <div class="box si"><strong>සිංහල:</strong><br>ඔයාගේ changes වල saved checkpoint එකක් message එකක් එක්ක හදනවා.</div>
+  </div>
+
+  <h3>Good commit examples</h3>
+  <pre><code>git commit -m "Add login page UI"
+git commit -m "Add login validation"
+git commit -m "Fix login button issue"</code></pre>
+</section>
+
+<section class="section">
+  <h2><span class="stepnum">9</span>Push Feature Branch / Feature Branch එක GitHub එකට Push කරන්න</h2>
+  <pre><code>git push -u origin feature-login</code></pre>
+  <div class="lang">
+    <div class="box en"><strong>English:</strong><br>Uploads your local <code>feature-login</code> branch to GitHub. The <code>-u</code> links your local branch to the remote branch.</div>
+    <div class="box si"><strong>සිංහල:</strong><br>ඔයාගේ local <code>feature-login</code> branch එක GitHub එකට upload කරනවා. <code>-u</code> එකෙන් local branch එක remote branch එකට link කරනවා.</div>
+  </div>
+
+  <div class="note">
+    After the first push, you can usually use only:
+    <pre><code>git push</code></pre>
+    පළමු push එකෙන් පස්සේ සාමාන්‍යයෙන් <code>git push</code> විතරක් භාවිතා කරන්න පුළුවන්.
+  </div>
+</section>
+
+<section class="section">
+  <h2><span class="stepnum">10</span>Create Pull Request / Pull Request එකක් හදන්න</h2>
+  <pre><code>feature-login  →  main</code></pre>
+  <div class="lang">
+    <div class="box en"><strong>English:</strong><br>Open GitHub → Pull Requests → New Pull Request. Set <code>base: main</code> and <code>compare: feature-login</code>.</div>
+    <div class="box si"><strong>සිංහල:</strong><br>GitHub → Pull Requests → New Pull Request යන්න. <code>base: main</code> සහ <code>compare: feature-login</code> දාන්න.</div>
+  </div>
+</section>
+
+<section class="section">
+  <h2><span class="stepnum">11</span>Review and Merge / Review කර Merge කරන්න</h2>
+  <div class="lang">
+    <div class="box en"><strong>English:</strong><br>Another team member checks the code. If everything is correct, merge the Pull Request into <code>main</code>.</div>
+    <div class="box si"><strong>සිංහල:</strong><br>වෙන team member කෙනෙක් code එක check කරනවා. හරි නම් Pull Request එක <code>main</code> branch එකට merge කරනවා.</div>
+  </div>
+</section>
+
+<section class="section">
+  <h2><span class="stepnum">12</span>Update Local Main After Merge / Merge එකෙන් පස්සේ Local Main Update කරන්න</h2>
+  <pre><code>git checkout main
+git pull origin main</code></pre>
+  <div class="lang">
+    <div class="box en"><strong>English:</strong><br>Switches back to <code>main</code> and downloads the newly merged changes.</div>
+    <div class="box si"><strong>සිංහල:</strong><br>ආපහු <code>main</code> branch එකට ගිහින් merge වුණු latest code එක PC එකට ගන්නවා.</div>
+  </div>
+</section>
+
+<section class="section">
+  <h2><span class="stepnum">13</span>Create the Next Feature Branch / ඊළඟ Feature Branch එක හදන්න</h2>
+  <pre><code>git checkout -b feature-dashboard</code></pre>
+  <div class="lang">
+    <div class="box en"><strong>English:</strong><br>Create the next feature branch from the latest <code>main</code>.</div>
+    <div class="box si"><strong>සිංහල:</strong><br>Latest <code>main</code> එකෙන් ඊළඟ feature එකට අලුත් branch එකක් හදන්න.</div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Daily Workflow / දිනපතා වැඩ කරන Flow එක</h2>
+  <pre><code>git checkout main
+git pull origin main
+git checkout feature-login
+
+# Do coding
+
+git status
+git add .
+git commit -m "Update login feature"
+git push</code></pre>
+
+  <div class="flow">
+    Main → Pull Latest → Feature Branch → Code → Status → Add → Commit → Push → Pull Request → Review → Merge
+  </div>
+</section>
+
+<section class="section">
+  <h2>Useful Commands / වැදගත් Commands</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Command</th>
+        <th>English</th>
+        <th>සිංහල</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><code>git branch</code></td><td>Show local branches</td><td>Local branches බලන්න</td></tr>
+      <tr><td><code>git branch -a</code></td><td>Show local and remote branches</td><td>Local සහ remote branches බලන්න</td></tr>
+      <tr><td><code>git status</code></td><td>Show current file changes</td><td>දැනට වෙනස් වුණු files බලන්න</td></tr>
+      <tr><td><code>git diff</code></td><td>See exact code changes</td><td>Code එකේ වෙනස්කම් බලන්න</td></tr>
+      <tr><td><code>git fetch</code></td><td>Check remote updates without merging</td><td>Merge නොකර remote updates check කරන්න</td></tr>
+      <tr><td><code>git pull origin main</code></td><td>Get latest main</td><td>Latest main එක ගන්න</td></tr>
+      <tr><td><code>git checkout main</code></td><td>Switch to main</td><td>Main branch එකට යන්න</td></tr>
+      <tr><td><code>git checkout feature-login</code></td><td>Switch to login branch</td><td>Login branch එකට යන්න</td></tr>
+      <tr><td><code>git merge main</code></td><td>Bring main changes into current branch</td><td>Main changes current branch එකට ගන්න</td></tr>
+      <tr><td><code>git log --oneline</code></td><td>View short commit history</td><td>Short commit history බලන්න</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="section">
+  <h2>4-Member Example / Members 4 දෙනෙකුගේ Example එක</h2>
+  <pre><code>main
+│
+├── feature-login            → Member 1
+├── feature-dashboard        → Member 2
+├── feature-user-management  → Member 3
+└── feature-reports          → Member 4</code></pre>
+  <div class="note warn">
+    Each member can work on a different feature branch. After completing the feature, create a Pull Request and merge it into <code>main</code>.
+    <br><br>
+    එක් එක් member තමන්ගේ feature branch එකේ වැඩ කරන්න. Feature එක complete වුණාම Pull Request එකක් හදලා <code>main</code> එකට merge කරන්න.
+  </div>
+</section>
+
+<section class="section">
+  <h2>Important Rules / වැදගත් නීති</h2>
+  <div class="note danger">
+    <strong>Do not upload / Upload කරන්න එපා:</strong><br>
+    Passwords, API keys, <code>.env</code> files, secret tokens, database passwords.
+  </div>
+  <div class="note warn">
+    <strong>Do not code directly on main.</strong><br>
+    <strong>Main branch එකේ direct code කරන්න එපා.</strong>
+  </div>
+</section>
+
+<footer>SmartDS GitHub Group Project Guide — English + Sinhala</footer>
+</div>
+</body>
+</html>
